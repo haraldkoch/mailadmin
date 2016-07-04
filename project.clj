@@ -30,7 +30,11 @@
                  [conman "0.5.8"]
                  [mysql/mysql-connector-java "5.1.6"]
                  [org.webjars/webjars-locator-jboss-vfs "0.1.0"]
-                 [luminus-immutant "0.2.0"]]
+                 [luminus-immutant "0.2.0"]
+
+                 ; local additions
+                 [com.andrewmcveigh/cljs-time "0.4.0"]
+                 [re-frame "0.7.0"]]
 
   :min-lein-version "2.0.0"
 

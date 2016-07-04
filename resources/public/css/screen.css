@@ -66,3 +66,76 @@ body {
     }
 }
 
+#domain-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#domain-list li {
+    position: relative;
+    font-size: 24px;
+    border-bottom: 1px dotted #ccc;
+}
+
+#domain-list li:last-child {
+    border-bottom: none;
+}
+
+#domain-list li.editing {
+    border-bottom: none;
+    padding: 0;
+}
+
+#domain-list li.editing .edit {
+    display: block;
+    width: 506px;
+    padding: 13px 17px 12px 17px;
+    margin: 0 0 0 43px;
+}
+
+#domain-list li.editing .view {
+    display: none;
+}
+
+#domain-list li label {
+    white-space: pre;
+    word-break: break-word;
+    padding: 15px 60px 15px 15px;
+    margin-left: 45px;
+    display: block;
+    line-height: 1.2;
+    -webkit-transition: color 0.4s;
+    transition: color 0.4s;
+}
+
+#domain-list li .destroy {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    margin: auto 0;
+    font-size: 22px;
+    color: #a88a8a;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+#domain-list li .destroy:hover {
+    text-shadow: 0 0 1px #000,
+    0 0 10px rgba(199, 107, 107, 0.8);
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+#domain-list li .destroy:after {
+    content: '✖';
+}
+
+#domain-list li:hover .destroy {
+    display: block;
+}

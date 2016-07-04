@@ -6,6 +6,10 @@
             [goog.history.EventType :as HistoryEventType]
             [markdown.core :refer [md->html]]
             [mailadmin.ajax :refer [load-interceptors!]]
+            [mailadmin.views :refer [mailadmin-page]]
+            [mailadmin.handlers]
+            [mailadmin.subs]
+            [re-frame.core :refer [dispatch dispatch-sync]]
             [ajax.core :refer [GET POST]])
   (:import goog.History))
 
@@ -27,6 +31,7 @@
         [:a.navbar-brand {:href "#/"} "mailadmin"]
         [:ul.nav.navbar-nav
          [nav-link "#/" "Home" :home collapsed?]
+         [nav-link "#/mailadmin" "Mail Admin" :mailadmin collapsed?]
          [nav-link "#/about" "About" :about collapsed?]]]])))
 
 (defn about-page []
@@ -52,6 +57,7 @@
 
 (def pages
   {:home #'home-page
+   :mailadmin #'mailadmin-page
    :about #'about-page})
 
 (defn page []
@@ -63,6 +69,9 @@
 
 (secretary/defroute "/" []
   (session/put! :page :home))
+
+(secretary/defroute "/mailadmin" []
+  (session/put! :page :mailadmin))
 
 (secretary/defroute "/about" []
   (session/put! :page :about))
@@ -91,4 +100,5 @@
   (load-interceptors!)
   (fetch-docs!)
   (hook-browser-navigation!)
-  (mount-components))
+  (mount-components)
+  (dispatch-sync [:initialize]))

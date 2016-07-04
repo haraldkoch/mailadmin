@@ -19,7 +19,7 @@ WHERE id = :id;
 SELECT * FROM domain
 WHERE id = :id;
 
--- :name find-domain-by-name :? :1
+-- :name find-domain :? :1
 -- :doc fetch a domain by domain name.
 SELECT * FROM domain
 WHERE domain = :domain;

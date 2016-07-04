@@ -9,7 +9,7 @@
 
 
 (defn create-domain! [params]
-  (db/create-domain! (params))
+  (db/create-domain! params)
   (str "domain " (:domain params) " created successfully"))
 
 (defn handle-create-domain! [{:keys [:params]}]
@@ -19,7 +19,7 @@
 
 
 (defn update-domain! [params]
-  (db/update-domain! (params))
+  (db/update-domain! params)
   (str "domain " (:domain params) " created successfully"))
 
 (defn handle-update-domain! [_ {:keys [:params]}]
