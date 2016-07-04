@@ -80,9 +80,9 @@
   :update-domain
   standard-middlewares
   (fn
-    [db [_ form-data]]
+    [db [_ id new-domain]]
     (clear-indicators)
-    (a/update-domain! form-data)
+    (a/update-domain! {:id id :domain new-domain})
     db))
 
 (register-handler

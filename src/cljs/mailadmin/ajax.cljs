@@ -38,6 +38,7 @@
      :error-handler #(dispatch [:bad-response %1])}))
 
 (defn create-domain! [data]
+  (js/console.log "create domain " data)
   (ajax.core/PUT
     "/domains"
     {:params        data
@@ -47,6 +48,7 @@
      :error-handler #(dispatch [:bad-response %1])}))
 
 (defn update-domain! [data]
+  (js/console.log "update domain " data)
   (ajax.core/POST
     (str "/domains/" (:id data))
     {:params        data
@@ -56,6 +58,7 @@
      :error-handler #(dispatch [:bad-response %1])}))
 
 (defn delete-domain! [data]
+  (js/console.log "delete domain " data)
   (ajax.core/DELETE
     (str "/domains/" (:id data))
     {:handler       #(do

@@ -60,6 +60,9 @@
                        :on-save #(dispatch [:update-domain (:id domain) %])
                        :on-stop #(reset! editing false)}])])))
 
+(defn add-domain [domain]
+  (dispatch [:add-domain {:domain domain}]))
+
 (defn domains []
   (let [domains (subscribe [:domains])
         domains-loaded? (subscribe [:domains-loaded?])
@@ -70,7 +73,9 @@
         [:div.row
          [:div.col-sm-12
           [:h2 "Domains"]
-          [add-domain-form form-data]
+          [domain-input {:id "new-domain"
+                         :placeholder "Add a new domain name"
+                         :on-save add-domain}]
           [:ul#domain-list
            (for [domain @domains]
              ^{:key (:id domain)} [domain-item domain])]]]))))
