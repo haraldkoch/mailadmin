@@ -9,7 +9,7 @@
 
 
 (defn create-forwarding! [params]
-  (db/create-forwarding! (params))
+  (db/create-forwarding! params)
   (str "forwarding for " (:source params) " created successfully"))
 
 (defn handle-create-forwarding! [{:keys [:params]}]
@@ -19,7 +19,7 @@
 
 
 (defn update-forwarding! [params]
-  (db/update-forwarding! (params))
+  (db/update-forwarding! params)
   (str "forwarding for " (:source params) " updated successfully"))
 
 (defn handle-update-forwarding! [_ {:keys [:params]}]
@@ -37,7 +37,7 @@
 
 (defroutes forwarding-routes
            (GET "/forwardings" [] (handle-get-forwardings))
-           (GET "/forwardings/:id" [id :<< as-int] (handle-get-forwarding id))
-           (PUT "/forwardings" request (handle-create-forwarding request))
-           (POST "/forwardings/:id" [id :<< as-int :as request] (handle-update-forwarding id request))
-           (DELETE "/forwardings/:id" [id :<< as-int] (handle-delete-forwarding id)))
+           (GET "/forwardings/:id" [id] (handle-get-forwarding id))
+           (POST "/forwardings" request (handle-create-forwarding request))
+           (PUT "/forwardings/:id" [id :as request] (handle-update-forwarding id request))
+           (DELETE "/forwardings/:id" [id] (handle-delete-forwarding id)))

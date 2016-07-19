@@ -38,8 +38,8 @@
 
 (defroutes domain-routes
            (GET "/domains" [] (handle-get-domains))
-           (GET "/domains/:id" [id :<< as-int] (handle-get-domain id))
+           (GET "/domains/:id" [id] (handle-get-domain id))
            (GET "/domains/?domain=:domain" [domain] (handle-find-domain domain))
-           (PUT "/domains" request (handle-create-domain request))
-           (POST "/domains/:id" [id :<< as-int :as request] (handle-update-domain id request))
-           (DELETE "/domains/:id" [id :<< as-int] (handle-delete-domain id)))
+           (POST "/domains" request (handle-create-domain request))
+           (PUT "/domains/:id" [id :as request] (handle-update-domain id request))
+           (DELETE "/domains/:id" [id] (handle-delete-domain id)))

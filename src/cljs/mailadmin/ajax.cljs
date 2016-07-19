@@ -39,7 +39,7 @@
 
 (defn create-domain! [data]
   (js/console.log "create domain " data)
-  (ajax.core/PUT
+  (ajax.core/POST
     "/domains"
     {:params        data
      :handler       #(do
@@ -49,7 +49,7 @@
 
 (defn update-domain! [data]
   (js/console.log "update domain " data)
-  (ajax.core/POST
+  (ajax.core/PUT
     (str "/domains/" (:id data))
     {:params        data
      :handler       #(do
@@ -57,12 +57,41 @@
                       (dispatch [:fetch-domains]))
      :error-handler #(dispatch [:bad-response %1])}))
 
-(defn delete-domain! [data]
-  (js/console.log "delete domain " data)
+(defn delete-domain! [id]
+  (js/console.log "delete domain " id)
   (ajax.core/DELETE
-    (str "/domains/" (:id data))
+    (str "/domains/" id)
     {:handler       #(do
                       (dispatch [:set-status %])
                       (dispatch [:fetch-domains]))
+     :error-handler #(dispatch [:bad-response %1])}))
+
+(defn create-forwarding! [data]
+  (js/console.log "create forwarding " data)
+  (ajax.core/POST
+    "/forwardings"
+    {:params        data
+     :handler       #(do
+                      (dispatch [:set-status %])
+                      (dispatch [:fetch-forwardings]))
+     :error-handler #(dispatch [:bad-response %1])}))
+
+(defn update-forwarding! [data]
+  (js/console.log "update forwarding " data)
+  (ajax.core/PUT
+    (str "/forwardings/" (:id data))
+    {:params        data
+     :handler       #(do
+                      (dispatch [:set-status %])
+                      (dispatch [:fetch-forwardings]))
+     :error-handler #(dispatch [:bad-response %1])}))
+
+(defn delete-forwarding! [id]
+  (js/console.log "delete forwarding " id)
+  (ajax.core/DELETE
+    (str "/forwardings/" id)
+    {:handler       #(do
+                      (dispatch [:set-status %])
+                      (dispatch [:fetch-forwardings]))
      :error-handler #(dispatch [:bad-response %1])}))
 

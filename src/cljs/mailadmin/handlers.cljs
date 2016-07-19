@@ -89,7 +89,34 @@
   :delete-domain
   standard-middlewares
   (fn
+    [db [_ id]]
+    (clear-indicators)
+    (a/delete-domain! id)
+    db))
+
+(register-handler
+  :add-forwarding
+  standard-middlewares
+  (fn
     [db [_ form-data]]
     (clear-indicators)
-    (a/delete-domain! form-data)
+    (a/create-forwarding! form-data)
+    db))
+
+(register-handler
+  :update-forwarding
+  standard-middlewares
+  (fn
+    [db [_ id form-data]]
+    (clear-indicators)
+    (a/update-forwarding! (merge {:id id} form-data))
+    db))
+
+(register-handler
+  :delete-forwarding
+  standard-middlewares
+  (fn
+    [db [_ id]]
+    (clear-indicators)
+    (a/delete-forwarding! id)
     db))
