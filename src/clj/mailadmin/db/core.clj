@@ -30,3 +30,6 @@
   (set-parameter [v ^PreparedStatement stmt idx]
     (.setTimestamp stmt idx (java.sql.Timestamp. (.getTime v)))))
 
+(declare create-domain! delete-domain! find-domain get-all-domains get-domain update-domain!
+         create-forwarding! delete-forwarding! find-forwarding get-all-forwardings get-forwarding update-forwarding!
+         create-user! delete-user! find-user get-all-users get-user update-user!)

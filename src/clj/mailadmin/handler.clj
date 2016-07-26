@@ -4,6 +4,7 @@
             [mailadmin.routes.home :refer [home-routes]]
             [mailadmin.routes.domains :refer [domain-routes]]
             [mailadmin.routes.forwardings :refer [forwarding-routes]]
+            [mailadmin.routes.users :refer [user-routes]]
             [compojure.route :as route]
             [mailadmin.env :refer [defaults]]
             [mount.core :as mount]
@@ -15,13 +16,7 @@
 
 (def app-routes
   (routes
-    (-> #'home-routes
-        (wrap-routes middleware/wrap-csrf)
-        (wrap-routes middleware/wrap-formats))
-    (-> #'domain-routes
-        (wrap-routes middleware/wrap-csrf)
-        (wrap-routes middleware/wrap-formats))
-    (-> #'forwarding-routes
+    (-> (routes #'home-routes #'domain-routes #'forwarding-routes #'user-routes)
         (wrap-routes middleware/wrap-csrf)
         (wrap-routes middleware/wrap-formats))
     (route/not-found

@@ -20,7 +20,7 @@
 
 (register-handler :fetch-domains standard-middlewares (fn [db _] (a/fetch-domains) db))
 (register-handler :fetch-forwardings standard-middlewares (fn [db _] (a/fetch-forwardings) db))
-(register-handler :fetch-users standard-middlewares (fn [db _] (a/reload-users) db))
+(register-handler :fetch-users standard-middlewares (fn [db _] (a/fetch-users) db))
 (register-handler :set-status standard-middlewares (fn [db [_ status]] (-> db (assoc :status status))))
 (register-handler :set-error standard-middlewares (fn [db [_ error]] (-> db (assoc :error error))))
 (register-handler :bad-response standard-middlewares (fn [db [_ response]] (-> db (assoc :error (get-in response [:response :error])))))
@@ -37,7 +37,7 @@
         (assoc :forwardings-loaded? false))
     (a/fetch-domains)
     (a/fetch-forwardings)
-    (a/reload-users)
+    (a/fetch-users)
     db))
 
 (register-handler
@@ -119,4 +119,31 @@
     [db [_ id]]
     (clear-indicators)
     (a/delete-forwarding! id)
+    db))
+
+(register-handler
+  :add-user
+  standard-middlewares
+  (fn
+    [db [_ form-data]]
+    (clear-indicators)
+    (a/create-user! form-data)
+    db))
+
+(register-handler
+  :update-user
+  standard-middlewares
+  (fn
+    [db [_ id form-data]]
+    (clear-indicators)
+    (a/update-user! (merge {:id id} form-data))
+    db))
+
+(register-handler
+  :delete-user
+  standard-middlewares
+  (fn
+    [db [_ id]]
+    (clear-indicators)
+    (a/delete-user! id)
     db))

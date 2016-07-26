@@ -31,7 +31,7 @@
     {:handler       #(dispatch [:process-forwardings-response %1])
      :error-handler #(dispatch [:bad-response %1])}))
 
-(defn reload-users []
+(defn fetch-users []
   (ajax.core/GET
     "/users"
     {:handler       #(dispatch [:process-users-response %1])
@@ -93,5 +93,34 @@
     {:handler       #(do
                       (dispatch [:set-status %])
                       (dispatch [:fetch-forwardings]))
+     :error-handler #(dispatch [:bad-response %1])}))
+
+(defn create-user! [data]
+  (js/console.log "create user " data)
+  (ajax.core/POST
+    "/users"
+    {:params        data
+     :handler       #(do
+                      (dispatch [:set-status %])
+                      (dispatch [:fetch-users]))
+     :error-handler #(dispatch [:bad-response %1])}))
+
+(defn update-user! [data]
+  (js/console.log "update user " data)
+  (ajax.core/PUT
+    (str "/users/" (:id data))
+    {:params        data
+     :handler       #(do
+                      (dispatch [:set-status %])
+                      (dispatch [:fetch-users]))
+     :error-handler #(dispatch [:bad-response %1])}))
+
+(defn delete-user! [id]
+  (js/console.log "delete user " id)
+  (ajax.core/DELETE
+    (str "/users/" id)
+    {:handler       #(do
+                      (dispatch [:set-status %])
+                      (dispatch [:fetch-users]))
      :error-handler #(dispatch [:bad-response %1])}))
 
