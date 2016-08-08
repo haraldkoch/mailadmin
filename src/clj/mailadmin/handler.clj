@@ -2,6 +2,7 @@
   (:require [compojure.core :refer [routes wrap-routes]]
             [mailadmin.layout :refer [error-page]]
             [mailadmin.routes.home :refer [home-routes]]
+	    [mailadmin.routes.services :refer [service-routes]]
             [mailadmin.routes.domains :refer [domain-routes]]
             [mailadmin.routes.forwardings :refer [forwarding-routes]]
             [compojure.route :as route]
@@ -24,6 +25,7 @@
     (-> #'forwarding-routes
         (wrap-routes middleware/wrap-csrf)
         (wrap-routes middleware/wrap-formats))
+    #'service-routes
     (route/not-found
       (:body
         (error-page {:status 404

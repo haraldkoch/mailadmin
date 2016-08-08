@@ -6,7 +6,6 @@
             [mailadmin.config :refer [env]]
             [clojure.tools.cli :refer [parse-opts]]
             [clojure.tools.logging :as log]
-            [luminus.logger :as logger]
             [mount.core :as mount])
   (:gen-class))
 
@@ -32,9 +31,6 @@
                 :stop
                 (when repl-server
                   (repl/stop repl-server)))
-
-(mount/defstate log
-                :start (logger/init (:log-config env)))
 
 
 (defn stop-app []

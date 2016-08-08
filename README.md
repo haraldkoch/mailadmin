@@ -4,7 +4,7 @@
 
 # mailadmin
 
-generated using [Luminus](http://www.luminusweb.net/) version "2.9.10.76"
+generated using Luminus version "2.9.10.86"
 
 A small project for managing my private site's postfix virtual domains, aliases, and users.
 
